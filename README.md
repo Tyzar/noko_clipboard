@@ -10,7 +10,7 @@ Create a plugin instance in dart side as below
 final _nokoClipboardPlugin = NokoClipboard();
 ```
 
-Before start observing the clipboard, you must register a callback to clip data stream ```clipDataStream```.
+Before start observing the clipboard, you must register a callback to clip data stream ```clipDataStream```. Event data is text value (```String```).
 
 ```dart
 _subscription = _nokoClipboardPlugin.clipDataStream.listen(
@@ -26,4 +26,4 @@ After that, call ```initialize``` to start observing the clipboard changes.
 _nokoClipboardPlugin.initialize();
 ```
 
-### ~Good lucks~
+Good lucks!!
