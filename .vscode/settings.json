@@ -1,0 +1,13 @@
+{
+    "cmake.sourceDirectory": "/home/intishar-abdillah/Development/Project/flutter_pkgs/noko_clipboard/example/linux",
+    "cmake.configureOnOpen": true,
+    "files.associations": {
+        "cstring": "cpp",
+        "any": "cpp",
+        "functional": "cpp",
+        "memory": "cpp",
+        "optional": "cpp",
+        "sstream": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}
