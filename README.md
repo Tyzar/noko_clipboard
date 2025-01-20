@@ -1,15 +1,29 @@
 # noko_clipboard
 
-A new Flutter plugin project.
+A Flutter plugin to observe system clipboard changed. Currently only Linux platforms are supported.
 
 ## Getting Started
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/to/develop-plugins),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+Create a plugin instance in dart side as below
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```dart
+final _nokoClipboardPlugin = NokoClipboard();
+```
 
+Before start observing the clipboard, you must register a callback to clip data stream ```clipDataStream```.
+
+```dart
+_subscription = _nokoClipboardPlugin.clipDataStream.listen(
+      (event) {
+        ...your handler here
+      },
+    );
+```
+
+After that, call ```initialize``` to start observing the clipboard changes.
+
+```dart
+_nokoClipboardPlugin.initialize();
+```
+
+### ~Good lucks~
