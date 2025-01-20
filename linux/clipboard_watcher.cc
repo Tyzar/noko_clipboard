@@ -3,7 +3,6 @@
 #include <gtk/gtk.h>
 #include <stdbool.h>
 #include <string.h>
-#include <stdio.h>
 #include <unistd.h>
 
 const int MICRO_TO_MILIS_SEC = 1000;
@@ -28,8 +27,7 @@ static void *observe_clipboard(void *arg)
     is_running = true;
     while (is_running)
     {
-        usleep(1000 * MICRO_TO_MILIS_SEC); // sleep thread
-        printf("Try get clip data...\n");
+        usleep(1000 * MICRO_TO_MILIS_SEC);        
 
         gchar *new_clip_text = gtk_clipboard_wait_for_text(gtkcb);
         if (!new_clip_text)
@@ -41,16 +39,14 @@ static void *observe_clipboard(void *arg)
         {
             continue;
         }
-
-        printf("New clip text: %s\n", new_clip_text);
+        
         clip_data_text = strdup(new_clip_text);
         g_free(new_clip_text);
 
         // notify to main gtk context thread
         g_idle_add(G_SOURCE_FUNC(notify_clipdata_changed), NULL);
     }
-
-    printf("Stopping clip watcher...\n");
+    
     return NULL;
 }
 
@@ -89,6 +85,6 @@ bool clip_watcher_dispose(void)
         g_free(clip_data_text);
         clip_data_text = NULL;
     }
-    printf("Clip watcher is disposed...\n");
+    
     return true;
 }

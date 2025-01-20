@@ -3,7 +3,6 @@
 #include <flutter_linux/flutter_linux.h>
 #include <gtk/gtk.h>
 #include <sys/utsname.h>
-#include <stdio.h>
 #include <cstring>
 #include <stdbool.h>
 
@@ -32,12 +31,7 @@ static void handle_clipdata_changed(const gchar *clipdata)
 {
   if(m_clipdata_event_channel && is_event_channel_connected){
     FlValue *clipdata_val = fl_value_new_string(clipdata);
-    if(!fl_event_channel_send(m_clipdata_event_channel, clipdata_val, NULL, NULL)){
-      printf("Sent clipdata event channel is failed\n");
-      return;
-    }
-
-    printf("Sent clipdata event channel is success\n");
+    fl_event_channel_send(m_clipdata_event_channel, clipdata_val, NULL, NULL);        
   }
 }
 
@@ -111,15 +105,13 @@ static void method_call_cb(FlMethodChannel *channel, FlMethodCall *method_call,
 /**
  * Event channel handler
  */
-static FlMethodErrorResponse *on_clipdata_event_chan_connected(FlEventChannel *channel, FlValue *args, gpointer user_data){
-  printf("Clipdata event channel connected...\n");
+static FlMethodErrorResponse *on_clipdata_event_chan_connected(FlEventChannel *channel, FlValue *args, gpointer user_data){  
   is_event_channel_connected = true;
   
   return NULL;
 }
 
-static FlMethodErrorResponse *on_clipdata_event_chan_disconnected(FlEventChannel *channel, FlValue *args, gpointer user_data){
-  printf("Clipdata event channel disconnected...\n");
+static FlMethodErrorResponse *on_clipdata_event_chan_disconnected(FlEventChannel *channel, FlValue *args, gpointer user_data){  
   is_event_channel_connected = false;
   
   return NULL;
