@@ -25,5 +25,11 @@ After that, call ```initialize``` to start observing the clipboard changes.
 ```dart
 _nokoClipboardPlugin.initialize();
 ```
+Don't forget to cancel the clip data stream subscription and ```dispose``` plugin when not used anymore.
+
+```dart
+_subscription.cancel();
+_nkClipboard.dispose();
+```
 
 Good lucks!!
